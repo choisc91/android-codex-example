@@ -6,6 +6,9 @@ val Purple80 = Color(0xFFFFC1C1)
 val PurpleGrey80 = Color(0xFFFFD6D6)
 val Pink80 = Color(0xFFFFE6E6)
 
-val Purple40 = Color(0xFFFF9A9A)
+val PastelRed = Color(0xFFFFB3B3)
+val DarkRed = Color(0xFFB71C1C)
+
+val Purple40 = PastelRed
 val PurpleGrey40 = Color(0xFFFF7D7D)
 val Pink40 = Color(0xFFFFA3A3)
