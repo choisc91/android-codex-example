@@ -19,6 +19,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -28,7 +29,9 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import kr.com.characin.codexexample.ui.theme.DarkRed
 import kr.com.characin.codexexample.ui.theme.MyApplicationTheme
 
 class MainActivity : ComponentActivity() {
@@ -64,22 +67,32 @@ fun MainScreen() {
             )
         },
         bottomBar = {
-            NavigationBar {
+            NavigationBar(containerColor = DarkRed) {
                 items.forEachIndexed { index, pair ->
                     NavigationBarItem(
                         selected = index == selectedIndex,
                         onClick = { selectedIndex = index },
                         icon = { Icon(pair.second, contentDescription = pair.first) },
-                        label = { Text(pair.first) }
+                        label = { Text(pair.first) },
+                        colors = NavigationBarItemDefaults.colors(
+                            selectedIconColor = Color.White,
+                            selectedTextColor = Color.White,
+                            unselectedIconColor = Color.White,
+                            unselectedTextColor = Color.White
+                        )
                     )
                 }
             }
         }
     ) { innerPadding ->
-        Text(
-            text = "Selected: ${items[selectedIndex].first}",
-            modifier = Modifier.padding(innerPadding)
-        )
+        val modifier = Modifier.padding(innerPadding)
+        when (selectedIndex) {
+            0 -> HomeScreen(modifier)
+            1 -> SearchScreen(modifier)
+            2 -> FavoriteScreen(modifier)
+            3 -> ProfileScreen(modifier)
+            else -> SettingsScreen(modifier)
+        }
     }
 }
 
@@ -89,4 +102,29 @@ fun MainScreenPreview() {
     MyApplicationTheme {
         MainScreen()
     }
+}
+
+@Composable
+fun HomeScreen(modifier: Modifier = Modifier) {
+    Text(text = "Home Screen", modifier = modifier)
+}
+
+@Composable
+fun SearchScreen(modifier: Modifier = Modifier) {
+    Text(text = "Search Screen", modifier = modifier)
+}
+
+@Composable
+fun FavoriteScreen(modifier: Modifier = Modifier) {
+    Text(text = "Favorite Screen", modifier = modifier)
+}
+
+@Composable
+fun ProfileScreen(modifier: Modifier = Modifier) {
+    Text(text = "Profile Screen", modifier = modifier)
+}
+
+@Composable
+fun SettingsScreen(modifier: Modifier = Modifier) {
+    Text(text = "Settings Screen", modifier = modifier)
 }
